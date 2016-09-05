@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load custom_markdown %}
+{% block content %}
+<div class="posts">
+<hr>
+    <section class="post">
+        <header class="post-header">
+            <h2 class="post-title">{{ post.title }}</h2>
+
+            <p class="post-meta">
+                Time:  <a class="post-author" href="#">{{ post.timestamp }}</a> <a class="post-category post-category-js" href="#">python</a>
+            </p>
+        </header>
+
+        <div class="post-description">
+            <p>
+                {{ post.body|custom_markdown }}
+            </p>
+        </div>
+    </section>
+    {% include "duoshuo.html" %}
+</div><!-- /.blog-post -->
+{% endblock %}

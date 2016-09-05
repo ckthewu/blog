@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load custom_markdown %}
 {% block content %}
 <div class="posts">
     <form action="/blog/create/" method=post>
@@ -14,7 +14,7 @@
     {% for post in posts %}
         <section class="post">
             <header class="post-header">
-                <h2 class="post-title">{{ post.title }}</h2>
+                <h2 class="post-title"><a href="{% url 'detail' id=post.id %}">{{ post.title }}</a></h2>
 
                     <p class="post-meta">
                         Time:  <a class="post-author" href="#">{{ post.timestamp }}</a> <a class="post-category post-category-js" href="#">python</a>
@@ -23,7 +23,7 @@
 
                 <div class="post-description">
                     <p>
-                        {{ post.body }}
+                        {{ post.get_short_body|custom_markdown }}
                     </p>
                 </div>
         </section>

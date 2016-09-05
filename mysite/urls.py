@@ -22,6 +22,7 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^$',views.home),
+    url(r'^home',views.home),
     url(r'^blog/', include('blog.urls'), name = 'blog'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include(auth_urls, namespace='accounts')),

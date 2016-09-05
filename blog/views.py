@@ -30,3 +30,10 @@ def create_blogpost(request):
                  body=request.POST.get('body'),
                  timestamp=datetime.now(),).save()
     return HttpResponseRedirect('/blog/archive')
+
+def detail(request, id):
+    try:
+        post = BlogPost.objects.get(id=str(id))
+    except BlogPost.DoesNotExist:
+        raise 'Http404'
+    return render(request, 'detail.html', {'post' : post})
