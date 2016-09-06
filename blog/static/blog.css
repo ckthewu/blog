@@ -106,6 +106,10 @@ h3 {
     font-family: Georgia, "Cambria", serif;
     color: #444;
     line-height: 1.8em;
+    width: 800px;
+    border-width: 1px;
+	border-style: dashed;
+	border-color: blue;
 }
 .post-meta {
     color: #999;

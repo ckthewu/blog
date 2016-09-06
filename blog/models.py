@@ -19,7 +19,8 @@ class BlogPost(models.Model):
         if len(self.body)>100:
             return self.body[:100]+'......'
         return self.body
-
+    def __unicode__(self):
+        return self.title
 class BlogPostForm(forms.ModelForm):
     class Mate:
         models = BlogPost

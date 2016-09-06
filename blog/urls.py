@@ -6,5 +6,5 @@ urlpatterns = [
     url(r'^archive/(?P<id>\d+)/$', blog.views.detail, name='detail'),
     url(r'^archive', blog.views.archive),
     url(r'^create', blog.views.create_blogpost),
-
+    url(r'^bloglist', blog.views.bloglist),
 ]

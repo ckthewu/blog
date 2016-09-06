@@ -10,8 +10,8 @@
     <textarea name=body rows=3 cols=60></textarea><br>
     <input type=submit value="确认">
 </form>
-<hr>
     {% for post in posts %}
+    <hr>
         <section class="post">
             <header class="post-header">
                 <h2 class="post-title"><a href="{% url 'detail' id=post.id %}">{{ post.title }}</a></h2>

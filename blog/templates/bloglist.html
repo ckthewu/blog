@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="posts">
+<hr>
+    {% for date in dates %}
+    <section class="post">
+            <h2 class="post-title">{{ date }}</h2>
+    </section>
+    {% for post in posts %}
+    {% if post.timestamp.date == date %}
+    <section class="post">
+            <h2 class="post-title"><a href="{% url 'detail' id=post.id %}">{{ post.title }}</a></h2>
+            <p class="post-meta">
+                Time:  <a class="post-author" href="#">{{ post.timestamp }}</a> <a class="post-category post-category-js" href="#">python</a>
+            </p>
+    </section>
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+</div><!-- /.blog-post -->
+{% endblock %}

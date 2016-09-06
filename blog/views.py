@@ -37,3 +37,8 @@ def detail(request, id):
     except BlogPost.DoesNotExist:
         raise 'Http404'
     return render(request, 'detail.html', {'post' : post})
+
+def bloglist(request):
+    posts = BlogPost.objects.all().order_by('-timestamp')
+    dates = sorted(posts.dates('timestamp', 'day'),reverse=1)
+    return render_to_response('bloglist.html',{'posts':posts,'dates':dates},RequestContext(request))
