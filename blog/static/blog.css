@@ -1,6 +1,6 @@
- {
+* {
     -webkit-box-sizing: border-box;
-    -moz-box-sizine: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
@@ -34,7 +34,7 @@ h3 {
 }
 
 .sidebar {
-    background: rgb(58, 143, 183);
+    background: rgb(31, 141, 214);
     color: #fff;
 }
 
@@ -106,10 +106,6 @@ h3 {
     font-family: Georgia, "Cambria", serif;
     color: #444;
     line-height: 1.8em;
-    width: 800px;
-    border-width: 1px;
-	border-style: dashed;
-	border-color: blue;
 }
 .post-meta {
     color: #999;
@@ -167,7 +163,7 @@ h3 {
     }
 
     .header {
-        margin: 20% 2em 0;
+        margin: 80% 2em 0;
         text-align: right;
     }
 

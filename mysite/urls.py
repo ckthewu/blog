@@ -16,15 +16,16 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import urls as auth_urls
+from django.views.generic.base import RedirectView
 from mysite import views
 
 admin.autodiscover()
 
 urlpatterns = [
-    url(r'^$',views.home),
     url(r'^home',views.home),
     url(r'^blog/', include('blog.urls'), name = 'blog'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include(auth_urls, namespace='accounts')),
+    url(r'^.?',RedirectView.as_view(url='home')),
 ]
 
