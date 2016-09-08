@@ -15,24 +15,18 @@ class BlogPost(models.Model):
         path = reverse('detail', kwargs={'id': self.id})
         return "http://127.0.0.1:8000%s" % path
 
-    def get_short_body(self):
-        if len(self.body)>100:
-            return self.body[:100]+'......'
-        return self.body
     def __unicode__(self):
         return self.title
-class BlogPostForm(forms.ModelForm):
-    class Mate:
-        models = BlogPost
-        exclude = ('timestamp',)
 
 class BlogUser(models.Model):
     username = models.CharField(max_length= 20)
     def __unicode__(self):
         return self.username
+
 class PrivateBlog(models.Model):
     title = models.CharField(max_length=150)
     body = models.TextField()
+    tag = models.CharField(max_length=50,default='python')
     timestamp = models.DateTimeField()
     username = models.ForeignKey(BlogUser,on_delete=models.CASCADE)
     def __unicode__(self):

@@ -5,6 +5,6 @@ class BlogPostAdmin(admin.ModelAdmin):
 admin.site.register(models.BlogPost, BlogPostAdmin)
 
 class PrivateBlogAdmin(admin.ModelAdmin):
-    list_display = ('title','username','timestamp')
+    list_display = ('title','username','tag','timestamp')
 admin.site.register(models.PrivateBlog, PrivateBlogAdmin)
 # Register your models here.

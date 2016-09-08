@@ -9,6 +9,7 @@ from django.template.context_processors import request
 import os,time
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 # def index(request):
 #     return HttpResponse(u"是不是是傻")
 # Create your views here.
@@ -25,17 +26,34 @@ def archive(request):
     posts = BlogPost.objects.all().order_by('-timestamp')[:10]
     return render_to_response('archive2.html',{'posts':posts,'error':False}, RequestContext(request))
 
+# REPLACE BY class BlogView
+# def archivepage(request):
+#     blog_list = BlogPost.objects.all()
+#     paginator = Paginator(blog_list, 10) # Show 10 contacts per page
+#
+#     page = request.GET.get('page')
+#     try:
+#         blog_list_page = paginator.page(page)
+#     except PageNotAnInteger:
+#         # If page is not an integer, deliver first page.
+#         blog_list_page = paginator.page(1)
+#     except EmptyPage:
+#         return render(request, 'blog_archive_page.html', {'posts': None, 'error': False})
+#
+#     return render(request, 'blog_archive_page.html', {'posts': blog_list_page,'error':False})
+
+
+
 class BlogView(ListView):
     model = BlogPost
-    template_name = 'blog_archive.html'
+    template_name = 'blog_archive_page.html'
+    paginate_by = 10
     def get_context_data(self, **kwargs):
         context = super(BlogView, self).get_context_data(**kwargs)
         context['error'] = False
         return context
-
     def get_queryset(self):
-        """Return the last five published questions."""
-        return BlogPost.objects.order_by('-timestamp')[:10]
+        return BlogPost.objects.order_by('-timestamp')
 
 @csrf_exempt
 def create_blogpost(request):
@@ -68,14 +86,14 @@ class BlogDetailView(DetailView):
 class BlogListView(ListView):
     model = BlogPost
     template_name = 'blogpost_list.html'
+    paginate_by = 10
     def get_context_data(self, **kwargs):
         context = super(BlogListView, self).get_context_data(**kwargs)
         context['dates'] = sorted(BlogPost.objects.all().dates('timestamp', 'day'),reverse=1)
         return context
-
     def get_queryset(self):
         """Return the last five published questions."""
-        return BlogPost.objects.order_by('-timestamp')[:10]
+        return BlogPost.objects.order_by('-timestamp')
 
 def BlogSearch(request):
     if 's' in request.GET:
