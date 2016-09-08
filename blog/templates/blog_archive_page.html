@@ -1,19 +1,6 @@
 {% extends "base.html" %}
 {% load custom_markdown %}
 {% block content %}
-<div class="posts">
-    <form class="post" action="/blog/create/" method=post>
-    {% csrf_token %}
-        <div class="post-title">
-            标题:
-            <input type=text name=title><br>
-        </div>
-        <div>
-            内容:<br>
-            <textarea class="post-description" name=body rows=3 cols=60></textarea><br>
-        </div>
-    <input type=submit value="确认">
-</form>
     {% if error %}
         <h2 class="post-title">没有相关文章题目</a></h2>
     {% else %}

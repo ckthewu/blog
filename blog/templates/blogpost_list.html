@@ -10,7 +10,7 @@
     {% for post in object_list %}
     {% if post.timestamp.date == date %}
     <section>
-            <p class="post-description"><a href="archive/{{ post.id }}/">{{ post.title }}</a></p>
+            <p class="post-description"><a href="/blog/archive/{{ post.id }}/">{{ post.title }}</a></p>
             <p class="post-meta">
                 Time:  <a class="post-author" href="#">{{ post.timestamp }}</a> <a class="post-category post-category-js" href="#">python</a>
             </p>

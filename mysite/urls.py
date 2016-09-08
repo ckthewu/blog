@@ -18,14 +18,17 @@ from django.contrib import admin
 from django.contrib.auth import urls as auth_urls
 from django.views.generic.base import RedirectView
 from mysite import views
+from django.contrib.auth.views import login,logout
 
 admin.autodiscover()
 
 urlpatterns = [
-    url(r'^home',views.home),
     url(r'^blog/', include('blog.urls'), name = 'blog'),
     url(r'^admin/', admin.site.urls),
-    url(r'^accounts/', include(auth_urls, namespace='accounts')),
-    url(r'^.?',RedirectView.as_view(url='home')),
+    url(r'^login/in/', views.log_in),
+    url(r'^login/', views.to_log_in),
+    url(r'^logout/', views.log_out, name='logout'),
+    url(r'^home/',views.home),
+    url(r'^.?',RedirectView.as_view(url='home/')),
 ]
 

@@ -1,4 +1,6 @@
 #-*- coding:utf-8 -*-
+from django.contrib.auth.decorators import login_required
+
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
 from django.utils import timezone
@@ -9,6 +11,7 @@ from django.template.context_processors import request
 import os,time
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, FormView
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 # def index(request):
 #     return HttpResponse(u"是不是是傻")
@@ -55,14 +58,40 @@ class BlogView(ListView):
     def get_queryset(self):
         return BlogPost.objects.order_by('-timestamp')
 
+def BlogSearch(request):
+    if 's' in request.GET:
+        s = request.GET['s']
+        if s:
+            posts = BlogPost.objects.filter(title__icontains = s).order_by('-timestamp')
+            if len(posts)==0:
+                return render_to_response('archive2.html',{'posts':posts,'error':True}, RequestContext(request))
+            else:
+                return render_to_response('archive2.html',{'posts':posts,'error':False}, RequestContext(request))
+    return HttpResponseRedirect('/archive/')
+
+
 @csrf_exempt
 def create_blogpost(request):
     if request.method == 'POST':
         BlogPost(title=request.POST.get('title'),
                  body=request.POST.get('body'),
                  timestamp=timezone.now(),).save()
-    return HttpResponseRedirect('/blog/archive')
+    return HttpResponseRedirect('/blog/archive/')
 
+@login_required(login_url='/home/')
+def create(request):
+    return render(request, 'blog_create.html')
+
+# class BlogCreateView(CreateView):
+#     template_name = 'blog_create.html'
+#     model = BlogView
+#     post_save_redirect = '/blog/archive/'
+#     login_required = True
+#     fields = ['title','body']
+#     def get_context_data(self, **kwargs):
+#         context = super(BlogCreateView, self).get_context_data(**kwargs)
+#         context['object']
+#         return context
 # def detail(request, id):
 #     try:
 #         post = BlogPost.objects.get(id=str(id))
@@ -92,16 +121,5 @@ class BlogListView(ListView):
         context['dates'] = sorted(BlogPost.objects.all().dates('timestamp', 'day'),reverse=1)
         return context
     def get_queryset(self):
-        """Return the last five published questions."""
         return BlogPost.objects.order_by('-timestamp')
 
-def BlogSearch(request):
-    if 's' in request.GET:
-        s = request.GET['s']
-        if s:
-            posts = BlogPost.objects.filter(title__icontains = s)
-            if len(posts)==0:
-                return render_to_response('archive2.html',{'posts':posts,'error':True}, RequestContext(request))
-            else:
-                return render_to_response('archive2.html',{'posts':posts,'error':False}, RequestContext(request))
-    return HttpResponseRedirect('/blog/archive')
