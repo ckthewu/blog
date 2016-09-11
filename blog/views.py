@@ -78,7 +78,7 @@ def create_blogpost(request):
                  timestamp=timezone.now(),).save()
     return HttpResponseRedirect('/blog/archive/')
 
-@login_required(login_url='/home/')
+@login_required(login_url='/login/')
 def create(request):
     return render(request, 'blog_create.html')
 
@@ -115,7 +115,7 @@ class BlogDetailView(DetailView):
 class BlogListView(ListView):
     model = BlogPost
     template_name = 'blogpost_list.html'
-    paginate_by = 10
+    paginate_by = 30
     def get_context_data(self, **kwargs):
         context = super(BlogListView, self).get_context_data(**kwargs)
         context['dates'] = sorted(BlogPost.objects.all().dates('timestamp', 'day'),reverse=1)

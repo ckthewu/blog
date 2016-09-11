@@ -13,18 +13,30 @@
     <link rel="stylesheet" href="/static/marketing.css">
 </head>
 <body>
+<div class="header">
+    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+        <a class="pure-menu-heading" href="/home/">back to home</a>
+    </div>
+</div>
 <div class="splash-container">
     <div class="splash">
         <p class="splash-subhead">
+            Log in and you will have the right to create a blog.
+        </p>
+
         <form class="form" action="in/" method=post>
+            <p class="splash-subhead">
                 <fieldset class="pure-group">
                 {% csrf_token %}
-                <input type="text" class="pure-input-2-3" placeholder="Username" name="username"><hr>
+                <input type="text" class="pure-input-2-3" placeholder="Username" name="username"><br><br>
                 <input type="password" class="pure-input-2-3" placeholder="Password" name="password">
                 </fieldset>
-                <button type="submit" class="pure-button pure-input-1-2 pure-button-primary">Sign in</button>
-                </form>
-        </p>
+            </p>
+            <p>
+                <button type="submit" class="pure-button">Log in</button>
+            </p>
+        </form>
+
         <p>
         </p>
     </div>

@@ -8,7 +8,7 @@
     <hr>
         <section class="post">
             <header class="post-header">
-                <h2 class="post-title"><a href="{% url 'detail' pk=post.id %}">{{ post.title }}</a></h2>
+                <h2 class="post-title"><a href="{% url 'detail' pk=post.id %}">{{ post.title|truncatechars_html:26 }}</a></h2>
 
                     <p class="post-meta">
                         Time:  <a class="post-author" href="#">{{ post.timestamp }}</a> <a class="post-category post-category-js" href="#">python</a>
@@ -17,7 +17,7 @@
 
                 <div class="post-description">
                     <p>
-                        {{ post.body|custom_markdown|truncatewords_html:10 }}
+                        {{ post.body|custom_markdown|truncatechars_html:100 }}
                     </p>
                 </div>
                 <a class="pure-button" href="{% url 'detail' pk=post.id %}">Read More >>> </a>
