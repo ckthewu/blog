@@ -29,6 +29,6 @@ urlpatterns = [
     url(r'^login/', views.to_log_in),
     url(r'^logout/', views.log_out, name='logout'),
     url(r'^home/',views.home),
-    url(r'^.?',RedirectView.as_view(url='home/')),
+    url(r'^.?',RedirectView.as_view(url='/home/')),
 ]
 

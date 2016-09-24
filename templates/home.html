@@ -16,8 +16,11 @@
         <ul class="pure-menu-list">
             <li class="pure-menu-item pure-menu-selected"><a href="#" class="pure-menu-link">Home</a></li>
             <li class="pure-menu-item"><a href="/blog/archive/" class="pure-menu-link">Blog</a></li>
-            <li class="pure-menu-item"><a href="/login/" class="pure-menu-link">Log In</a></li>
+            {% if user.is_authenticated %}
             <li class="pure-menu-item"><a href="/logout/" class="pure-menu-link">Log Out</a></li>
+            {% else %}
+            <li class="pure-menu-item"><a href="/login/" class="pure-menu-link">Log In</a></li>
+            {% endif %}
         </ul>
 
     </div>

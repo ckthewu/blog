@@ -20,9 +20,15 @@
 </div>
 <div class="splash-container">
     <div class="splash">
+        {% if error %}
+        <p class="splash-subhead">
+            Wrong username or password.
+        </p>
+        {% else %}
         <p class="splash-subhead">
             Log in and you will have the right to create a blog.
         </p>
+        {% endif %}
 
         <form class="form" action="in/" method=post>
             <p class="splash-subhead">

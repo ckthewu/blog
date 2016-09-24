@@ -67,7 +67,7 @@ def BlogSearch(request):
                 return render_to_response('archive2.html',{'posts':posts,'error':True}, RequestContext(request))
             else:
                 return render_to_response('archive2.html',{'posts':posts,'error':False}, RequestContext(request))
-    return HttpResponseRedirect('/archive/')
+    return HttpResponseRedirect('/blog/archive/')
 
 
 @csrf_exempt
