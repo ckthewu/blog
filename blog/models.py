@@ -5,6 +5,10 @@ from django import forms
 # Create your models here.
 from django.core.urlresolvers import reverse
 
+class BlogUser(models.Model):
+    username = models.CharField(max_length= 20)
+    def __unicode__(self):
+        return self.username
 
 class BlogPost(models.Model):
     title = models.CharField(max_length = 150)
@@ -18,15 +22,20 @@ class BlogPost(models.Model):
     def __unicode__(self):
         return self.title
 
-class BlogUser(models.Model):
-    username = models.CharField(max_length= 20)
+class BlogPost2(models.Model):
+    title = models.CharField(max_length = 150)
+    body = models.TextField()
+    tags = models.CharField(max_length=50,default='python')
+    timestamp = models.DateTimeField()
+    fuck = models.TextField()
+
     def __unicode__(self):
-        return self.username
+        return self.title
 
 class PrivateBlog(models.Model):
     title = models.CharField(max_length=150)
     body = models.TextField()
-    tag = models.CharField(max_length=50,default='python')
+    tag = models.CharField(max_length=50)
     timestamp = models.DateTimeField()
     username = models.ForeignKey(BlogUser,on_delete=models.CASCADE)
     def __unicode__(self):

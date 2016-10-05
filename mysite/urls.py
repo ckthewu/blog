@@ -24,6 +24,7 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^blog/', include('blog.urls'), name = 'blog'),
+    url(r'^ckweibo/', include('ckweibo.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^login/in/', views.log_in),
     url(r'^login/', views.to_log_in),

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'ckweibo',
 ]
 
 
@@ -83,6 +84,17 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'test',
+#         'USER': 'ckthewu',
+#         'PASSWORD': '7777777',
+#         'HOST':'localhost',
+#         'PORT':'3306',
+#     }
+# }
 
 
 # Password validation

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sendpage</title>
+</head>
+<body>
+    <form class="post" action="commit/" method=post>
+    {% csrf_token %}
+        <div>
+            内容:<br>
+            <textarea class="post-description" name=body rows=3 cols=60></textarea><br>
+        </div>
+    <input type=submit value="确认">
+        <div>
+            {{ content }}
+        </div>
+</form>
+</body>
+</html>
