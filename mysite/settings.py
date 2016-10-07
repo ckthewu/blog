@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 #coding : utf-8
 import os
-
+from weibo import APIClient
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -151,3 +151,10 @@ STATICFILES_FINDERS = (
 # upload folder
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+APP_KEY = '2144222432'
+APP_SECRET = 'ac0a4758fed8a0472f5c4f5605e1d4bf'
+CALLBACK_URL = 'http://127.0.0.1/ckweibo/callback/'
+NUMPPAGE = 20
+MyAPIClient = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
