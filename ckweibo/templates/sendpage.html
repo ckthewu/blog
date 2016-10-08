@@ -11,33 +11,25 @@
     <input type=submit value="确认">
     </form>
         {% for content in contents %}
-        <section class="post">
-            <header class="post-header">
-                <h2 class="post-title">
-                    <a href="http://weibo.com/{{ content.user.domain }}">
-                        <img src="{{ content.user.profile_image_url }}"/>{{ content.user.screen_name }}
+        <section class="weibo">
+            <header class="weibo-head">
+                <img src="{{ content.user.profile_image_url }}" class="weibo-icon"/>
+                <div class="weibo-head-content">
+                    <a href="http://weibo.com/{{ content.user.domain }}" class="weibo-head-name">
+                        {{ content.user.screen_name }}
                     </a>
-                </h2>
-                    <p class="post-meta">
-                        Time:  <a class="post-author" href="#">{{ content.created_at }}</a><br>
+                    <div class="weibo-head-imf">
+                        Time:{{ content.created_at }}<br>
                         From:{% autoescape off %}{{ content.source }}{% endautoescape %}
                         {{ content.pic_urls|length }}
-                    </p>
-            </header>
-                <div class="post-description">
-                    <p>
-                        {{ content.text }}
-                    </p>
-                    <div class="post-meta">
-                        {% if content.retweeted_status %}
-                        @{{ content.retweeted_status.user.screen_name }}:{{ content.retweeted_status.text }}<br>
-                        <div>
-                            {% for url in content.retweeted_status.pic_urls %}
-                            <img src="{{ url.thumbnail_pic }}">
-                            {% endfor %}
-                        </div>
-                        {% endif %}
                     </div>
+                </div>
+            </header>
+                <div class="weibo-content">
+                        {{ content.text }}
+                    {% if content.pic_urls %}
+                    <br>
+                    <button class="hidephoto">hide</button>
                     <div class="photo">
                         <div>
                             {% for url in content.pic_urls %}
@@ -45,7 +37,21 @@
                             {% endfor %}
                         </div>
                     </div>
+                    {% endif %}
                 </div>
+                    <div class="weibo-repost">
+                        {% if content.retweeted_status %}
+                        @{{ content.retweeted_status.user.screen_name }}:{{ content.retweeted_status.text }}<br>
+                        {% if content.retweeted_status.pic_urls %}
+                        <button class="hidephoto">hide</button>
+                        <div class="photo">
+                            {% for url in content.retweeted_status.pic_urls %}
+                            <img src="{{ url.thumbnail_pic }}">
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        {% endif %}
+                    </div>
         </section>
     <hr>
         {% endfor %}
@@ -53,14 +59,13 @@
 </div>
     <div class="pagination">
     <span class="step-links">
-        {% if ppage  %}
-            <a href="?page={{ ppage }}"><<-previous</a>
+        {% if page > 1  %}
+            <a href="?page={{ page|add:'-1' }}"><<-previous</a>
         {% endif %}
-
         <span class="current">
-
+            Page:{{ page }}
         </span>
-            <a href="?page={{ npage }}">next->></a>
+            <a href="?page={{ page|add:'1' }}">next->></a>
     </span>
     </div>
 {% endblock %}

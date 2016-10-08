@@ -21,6 +21,8 @@ def callback(request):
     return HttpResponseRedirect('/ckweibo/sendpage/')
 
 def sendpage(request):
+    if client.is_expires():
+        return HttpResponseRedirect('/ckweibo/weibohome/')
     if 'page' in request.GET:
         page = int(request.GET['page'])
     else:
@@ -36,9 +38,9 @@ def sendpage(request):
         #     contents.append(si['text'])
         contents.append(si)
         i+=1
-    # uid = client.account.get_uid.get()['uid']
-    # user = client.users.show.get(uid=uid)['screen_name']
-    user = ''
+    uid = client.account.get_uid.get()['uid']
+    username = client.users.show.get(uid=uid)['screen_name']
+    user = 'user:%s expires:%s' % (username, client.expires)
     context = {"contents":contents,'user':user,'page':page,'ppage':page-1,'npage':page+1}
     return render_to_response('sendpage.html',context,RequestContext(request))
 
